@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Zone Display</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        h1 {
+            color: #333;
+        }
+        .timezone {
+            margin: 20px 0;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <h1>Current Times in Major Time Zones</h1>
+    <div id="timezones">
+        <!-- Time zones will be populated here by JavaScript -->
+    </div>
+
+    <script>
+        // JavaScript function to display time in different time zones
+        function displayTime() {
+            const timeZones = {
+                "New York (Eastern Time)": "America/New_York",
+                "London (GMT)": "Europe/London",
+                "Tokyo (Japan Standard Time)": "Asia/Tokyo",
+                "Sydney (Australian Eastern Time)": "Australia/Sydney",
+                "Los Angeles (Pacific Time)": "America/Los_Angeles"
+            };
+
+            let timeContainer = document.getElementById('timezones');
+            timeContainer.innerHTML = ''; // Clear previous times
+
+            for (let city in timeZones) {
+                let timeZone = timeZones[city];
+                let now = new Date().toLocaleString("en-US", { timeZone: timeZone, timeStyle: "medium", hourCycle: "h24" });
+                timeContainer.innerHTML += `<div class="timezone"><strong>${city}:</strong> ${now}</div>`;
+            }
+        }
+
+        // Update times every second
+        setInterval(displayTime, 1000);
+        displayTime();
+    </script>
+</body>
+</html>
